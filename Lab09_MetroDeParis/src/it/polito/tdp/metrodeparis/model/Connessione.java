@@ -4,15 +4,15 @@ public class Connessione {
 	
 	private int id;
 	private int idlinea;
-	private int idf1;
-	private int idf2;
+	private Fermata f1;
+	private Fermata f2;
 	
-	public Connessione(int id, int idlinea, int idf1, int idf2) {
+	public Connessione(int id, int idlinea, Fermata f1,Fermata f2) {
 		super();
 		this.id = id;
 		this.idlinea = idlinea;
-		this.idf1 = idf1;
-		this.idf2 = idf2;
+		this.f1 = f1;
+		this.f2 = f2;
 	}
 	@Override
 	public int hashCode() {
@@ -46,20 +46,21 @@ public class Connessione {
 	public void setIdlinea(int idlinea) {
 		this.idlinea = idlinea;
 	}
-	public int getIdf1() {
-		return idf1;
+	public Fermata getF1() {
+		return f1;
 	}
-	public void setIdf1(int idf1) {
-		this.idf1 = idf1;
+	public void setF1(Fermata f1) {
+		this.f1 = f1;
 	}
-	public int getIdf2() {
-		return idf2;
+	public Fermata getF2() {
+		return f2;
 	}
-	public void setIdf2(int idf2) {
-		this.idf2 = idf2;
+	public void setF2(Fermata f2) {
+		this.f2 = f2;
 	}
 	@Override
 	public String toString() {
-		return "Connessione [id=" + id + ", idlinea=" + idlinea + ", idf1=" + idf1 + ", idf2=" + idf2 + "]";
+		return "Connessione [id=" + id + ", idlinea=" + idlinea + ", f1=" + f1 + ", f2=" + f2 + "]";
 	}
+	
 }
