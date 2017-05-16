@@ -1,6 +1,6 @@
 package it.polito.tdp.metrodeparis.model;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import com.javadocmd.simplelatlng.LatLng;
@@ -10,12 +10,14 @@ public class Fermata {
 	private int idFermata;
 	private String nome;
 	private LatLng coords;
-	List<Fermata> fermate= new ArrayList<>();
-	private List<Connessione> connessioni= new ArrayList<>();
-	public Fermata(int idFermata, String nome, LatLng coords) {
+	private int idconn;
+	private int idlinea;
+	public Fermata(int idFermata, String nome, LatLng coords,int idconn,int idlinea) {
 		this.idFermata = idFermata;
 		this.nome = nome;
 		this.coords = coords;
+		this.idconn=idconn;
+		this.idlinea=idlinea;
 	}
 	
 	public Fermata(int idFermata) {
@@ -46,9 +48,30 @@ public class Fermata {
 		this.coords = coords;
 	}
 
+	
+	
+	
+	public String toString() {
+		return nome;
+	}
+	
+	
+
+	public int getIdconn() {
+		return idconn;
+	}
+
+	public void setIdconn(int idconn) {
+		this.idconn = idconn;
+	}
+
 	@Override
 	public int hashCode() {
-		return ((Integer) idFermata).hashCode();
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idFermata;
+		result = prime * result + idlinea;
+		return result;
 	}
 
 	@Override
@@ -62,22 +85,23 @@ public class Fermata {
 		Fermata other = (Fermata) obj;
 		if (idFermata != other.idFermata)
 			return false;
+		if (idlinea != other.idlinea)
+			return false;
 		return true;
 	}
+
+	public int getIdlinea() {
+		return idlinea;
+	}
+
+	public void setIdlinea(int idlinea) {
+		this.idlinea = idlinea;
+	}
+
 	
-	@Override
-	public String toString() {
-		return nome;
-	}
+
 	
-public void setConnessioni(List<Connessione> connessioni) {
-		// TODO Auto-generated method stub
-		this.connessioni.addAll(connessioni);
-	}
-	public List<Fermata> getFermateConnesse(){
-		for( Connessione c: connessioni){
-			fermate.add(c.getF2());
-		}
-		return fermate;
-	}
+	
+
+	
 }

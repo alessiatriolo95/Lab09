@@ -4,7 +4,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import it.polito.tdp.metrodeparis.dao.MetroDAO;
 import it.polito.tdp.metrodeparis.model.Fermata;
+import it.polito.tdp.metrodeparis.model.Linea;
 import it.polito.tdp.metrodeparis.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -40,7 +42,7 @@ Model m;
 
     @FXML
     void doCalcolaPercorso(ActionEvent event) {
-    	btnCalcola.setDisable(false);
+    	/*btnCalcola.setDisable(false);
     	if(comboPartenza.getValue()!=null && comboArrivo.getValue()!=null){
     		btnCalcola.setDisable(true);
         	txtArea.appendText("percorso:\n"+ m.CamminoMinimo(comboPartenza.getValue(), comboArrivo.getValue()) );
@@ -51,6 +53,28 @@ Model m;
     	if(comboArrivo.getValue()==null){
     		System.out.println("ERR non hai inserito l'arrivo");
     	
+    	}*/
+    	//List<Linea> linee= m.getLinea();
+    	MetroDAO dao= new MetroDAO();
+    	if(comboPartenza.getValue()!=null && comboArrivo.getValue()!=null){
+    		List<Fermata> path=m.CamminoMinimo(comboPartenza.getValue(), comboArrivo.getValue());
+    		Fermata iniziale=path.get(0);
+    		txtArea.appendText("prendo metro "+ dao.getNomeLinea(iniziale.getIdlinea())+"\n");
+			txtArea.appendText(iniziale.toString()+"\n");
+    		for(int i=1;i<path.size();i++){
+
+				
+    			if(path.get(i).getIdFermata()== iniziale.getIdFermata() && path.get(i).getIdlinea()!=iniziale.getIdlinea()){
+    				txtArea.appendText("prendo metro "+dao.getNomeLinea( path.get(i).getIdlinea()) +"\n");
+    			}else{
+    				txtArea.appendText(path.get(i)+"\n");
+    				iniziale= path.get(i);
+    			}
+    		}
+    		txtArea.appendText("\n tempo impiegato: " +(m.calcolaTempoTot(comboPartenza.getValue(), comboArrivo.getValue())/3600));
+        	
+    		
+    		
     	}
     }
 
